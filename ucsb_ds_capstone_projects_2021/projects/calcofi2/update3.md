@@ -32,5 +32,20 @@ One issue we ran into with the way the datasets differed was that the water data
 
 Seeing that we had a very wide dataset (large number of columns), we created a long (more rows, less columns) format dataset. This would make it easier to filter the dataset to subset a particular species or pH measurement (min, max, or mean) to explore. To do this, we created a column for the species name, relative abundance, pH measurement, and pH value.
 
+```{figure} images/wide_data.png
+---
+height: 300px
+name: Wide Data
+---
+Wide Dataset: This is the format of the data after water, fish, and pH were combined into one dataset and the min, max and mean pH values are calculated.
+```
+
+```{figure} images/long_data.png
+---
+height: 300px
+name: Long Data
+---
+Long Dataset: This is the format of the "long" dataset with the pH and adundances turned into columns. 
+```
 
 ## Next Steps
