@@ -10,10 +10,27 @@ In our project, we aim to correlate water data containing many water characteris
 
 We are have a water time series dataset, what gives information about many water characteristics over many different locations, from 2008-2015, and we also have a fish time series dataset that tells us the abundance of each fish species at a given location and time, from the 1960's until present.
 
-## Finishing Processed Datasets
+## Data Processing 
 
+### Adding pH Calculations to Fish and Water Data
 
-## Title
+Data processing has been a big part of this project as we have to connect the water characterisitcs data to the larval fish data. After subsetting the larger fish dataset to match the avaialble dates and locations from the water data, we were able to match fish and water observations and added in the calculated pH values for each observation, as mentioned in ![Update 2](https://github.com/robin-hollingsworth/ucsb-ds-capstone-2021.github.io/blob/906a6bfefde537a4d696601f5abceefaa6951477/ucsb_ds_capstone_projects_2021/projects/calcofi2/update2.md). Being able to have the pH for each observation was a huge step towards our main project goal of correlating pH to larval fish abundance. Now we have all variables and measurements in one dataset with matching dates and locations from water, fish and pH calculations. We then decided to remove the water characteristics, except salinity and temperature. Because these water characteristics were used in the calculation of pH, we can infer their relationship with the species' abundance through their relationship with pH and we mostly care about pH for the purpose of this project to observe the effects of climate change. 
+
+### Relative Abundance
+
+The original larval fish dataset gave an abundance measurement for each species. For the sake of this project we want to look at how the abundance is changing over time so we wanted a abundance value that would allow us to do that among species. With current measurement, we are not able to compare values with other species to see which are increasing more or less relative to each other. To solve this issue, we calculated a "relative abundance" value within each species using the formula:
+
+```
+(value - average abundance) / average abundance
+```
+
+We changed all 0 values (where there is no observation of a species) to NA values so that we could distinguish it with an abundance observation that is equivalent to the mean, meaning a relative abundance of 0.
+
+### Formatting Datasets
+
+One issue we ran into with the way the datasets differed was that the water dataset was collected in the same locations over different depths while the fish dataset only had one collection per location. pH was calulated using the water characteristics at each depth so for one location their were multiple pH values. To avoid having repeated fish adundances, we found the minimum, maximum and mean pH values over the depths for each location. This allows us to keep some of the integrigity of the water dataset but also make it flow easily with the larval fish data. 
+
+Seeing that we had a very wide dataset (large number of columns), we created a long (more rows, less columns) format dataset. This would make it easier to filter the dataset to subset a particular species or pH measurement (min, max, or mean) to explore. To do this, we created a column for the species name, relative abundance, pH measurement, and pH value.
 
 
 ## Next Steps
